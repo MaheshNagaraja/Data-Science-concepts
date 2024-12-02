@@ -135,3 +135,33 @@ print("======",round((end-start),5)," ms======")
 ```
 ====== 0.03302  ms======
 ```
+
+#### 3) Print distinct field_of_study values
+```python
+# SQL
+start = time.time()
+cursor.execute("Select distinct Field_of_Study from career_data_new;")
+res = cursor.fetchall()
+print(res)
+end = time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+[('Medicine',), ('Education',), ('Arts',), ('Computer Science',), ('Business',), ('Mechanical Engineering',), ('Biology',), ('Law',), ('Economics',), ('Psychology',)]
+====== 0.08325  ms======
+```
+
+```python
+start = time.time()
+res = df.Field_of_Study.unique()
+print(res)
+end = time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+['Medicine' 'Education' 'Arts' 'Computer Science' 'Business' 'Mechanical Engineering' 'Biology' 'Law' 'Economics' 'Psychology']
+====== 0.00818  ms======
+```
+
