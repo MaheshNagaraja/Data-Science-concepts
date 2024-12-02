@@ -165,3 +165,133 @@ print("======",round((end-start),5)," ms======")
 ====== 0.00818  ms======
 ```
 
+#### 4) Fetch the data of people whose current occupation is Software Developer, job sat < 5,, age < 24 and salary > 100000
+```python
+#SQL
+start = time.time()
+cursor.execute("""select * from career_data_new where 
+job_satisfaction < 5 
+and current_occupation = 'Software Developer' 
+and salary>100000 and age < 24 
+and Industry_Growth_Rate='High';""")
+res = cursor.fetchall()
+for rows in res:
+    print(rows)
+end = time.time()
+print("======",round((end-start),5)," ms======")
+
+#Pandas
+start = time.time()
+kd = df[(df['Current_Occupation'] == 'Software Developer') & (df['Industry_Growth_Rate'] == 'High') & (df['Job_Satisfaction'] < 5) & (df['Age'] < 24) & (df['Salary'] > 10000)]
+print(kd)
+end = time.time()
+print("======",round((end-start),5)," ms======")
+```
+
+### Output:
+```
+54 rows
+====== 0.07644  ms======
+[54 rows x 23 columns]
+====== 0.04197  ms======
+```
+
+#### 5) which occupation has high job security?
+```python
+#SQL
+start = time.time()
+cursor.execute("""with ex as (
+SELECT 
+    current_occupation,
+    js,
+    DENSE_RANK() OVER (ORDER BY js DESC) AS rk
+FROM (
+    SELECT 
+        current_occupation,
+        ROUND(AVG(job_security), 2) AS js
+    FROM career_data_new
+    GROUP BY current_occupation
+) AS avg_job_security
+) select * from ex where rk=1;
+""")
+res = cursor.fetchall()
+print(res)
+end=time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+[('Software Developer', Decimal('5.53'), 1), ('Artist', Decimal('5.53'), 1)]
+====== 0.26329  ms======
+```
+
+```python
+#Pandas
+start = time.time()
+grouped_mean = df.groupby(by=['Current_Occupation'])['Job_Satisfaction'].mean()
+grouped_mean = grouped_mean.sort_values(ascending=False)
+grouped_mean = round(grouped_mean,2)
+print(grouped_mean.head(1))
+end=time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+Current_Occupation
+Psychologist    5.56
+Name: Job_Satisfaction, dtype: float64
+====== 0.01796  ms======
+```
+
+#### 6)  using joins fetch data of people who got high influenced by family and choose to get into software development occupation whose filed of study is medicine
+I will be using row_number and inner join query, since there is no primary key I have used row_number in this query for joins.
+```python
+start = time.time()
+cursor.execute("""WITH ex1 AS (
+    SELECT  
+        gender, 
+        Family_Influence,
+        field_of_study,
+        current_occupation,
+        row_number() OVER() AS serial_number
+    FROM career_data_new
+) 
+SELECT 
+    COUNT(*) AS Count_of_people, 
+    t1.gender, 
+    t1.field_of_study, 
+    t1.current_occupation
+FROM ex1 t1
+INNER JOIN ex1 t2 
+    ON t2.serial_number = t1.serial_number where t1.field_of_study = 'Medicine' and t1.current_occupation='Software Developer' and t1.Family_Influence='High'
+GROUP BY t1.gender, t1.field_of_study, t1.current_occupation;""")
+res = cursor.fetchall()
+print(res)
+
+end=time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+[(49, 'Female', 'Medicine', 'Software Developer'), (46, 'Male', 'Medicine', 'Software Developer')]
+====== 0.23358  ms======
+```
+
+```python
+start = time.time()
+filtered_df = df[
+(df['Field_of_Study'] == 'Medicine') & 
+(df['Current_Occupation'] == 'Software Developer') & 
+(df['Family_Influence'] == 'High')]
+result = filtered_df.groupby(['Gender', 'Field_of_Study', 'Current_Occupation']).size().reset_index(name='Count_of_people')
+print(result)
+end=time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+ Gender Field_of_Study  Current_Occupation  Count_of_people
+0  Female       Medicine  Software Developer               49
+1    Male       Medicine  Software Developer               46
+====== 0.02325  ms======
+```
