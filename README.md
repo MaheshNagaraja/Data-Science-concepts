@@ -28,8 +28,32 @@ SQL is typically used in DBMS or command-line interfaces, GUI's or python librar
 
 Here is a small case study of time execution of pandas and SQL. I have used kaggle data set - [Filed of Study vs Occupation](https://www.kaggle.com/datasets/jahnavipaliwal/field-of-study-vs-occupation) for analysis.
 
-### Prerequisites
+### Prerequisites  
+MySQL Workbench, Python, Jypter Notebook, Pandas, sqlite3 and mysql.connector  
+
 ### Steps to upload CSV into Mysql
-### Steps to connect Mysql server in pandas and create DataFrame
-### Time execution comparison - Pandas vs SQL
-### Conclusion
+Note: After downloading  [Filed of Study vs Occupation](https://www.kaggle.com/datasets/jahnavipaliwal/field-of-study-vs-occupation) dataset edit file columns with '_'(Field of Study ==> Field_of_Study), once all column names are edited then it's ready to upload into MySQL workbench. Refer [Import CSV file into MySQL](https://www.databasestar.com/mysql-workbench-import-csv/).
+
+### Steps to connect Mysql server in pandas and create DataFrame  
+
+```python
+import pandas as pd
+import mysql.connector as mysql
+from sqlalchemy import create_engine
+import time
+import sqlite3 as sq
+
+#connection and create cursor for sql execution
+
+mydbcon = mysql.connect(
+    host = "localhost",
+    user = "root",
+    password = "root123"
+)
+if mydbcon.is_connected:
+    print("Conncetion established sucessfully")
+else:
+    print("Connection faled, please check retry ")
+
+cursor=mydbcon.cursor()
+
