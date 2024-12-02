@@ -42,7 +42,8 @@ import mysql.connector as mysql
 from sqlalchemy import create_engine
 import time
 import sqlite3 as sq
-
+```
+```python
 #connection and create cursor for sql execution
 
 mydbcon = mysql.connect(
@@ -56,4 +57,23 @@ else:
     print("Connection faled, please check retry ")
 
 cursor=mydbcon.cursor()
+```
+### Output:
+```
+Conncetion established sucessfully
+```
+### Connect database and create dataframe
+```python
+#using database 
+cursor.execute("USE Career;")
+
+#dataframe creation using pandas
+df = pd.read_sql("SELECT * FROM CAREER_DATA_NEW;",mydbcon)
+df
+```
+### Output:
+```
+38444 rows × 23 columns
+```
+### Time execution analysis - Pandas vs SQL
 
