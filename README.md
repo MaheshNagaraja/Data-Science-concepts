@@ -77,4 +77,61 @@ df
 ```
 ### Time execution analysis - Pandas vs SQL
 
+#### 1) Print first 1000 records
+```python
+#SQL
+start = time.time()
+cursor.execute("SELECT * FROM CAREER_DATA_NEW LIMIT 1000;")
+data=cursor.fetchall()
+for rows in data:
+    print(rows)
+end = time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+1000 rows
+====== 0.02516  ms======
+```
 
+```python
+#Pandas
+start = time.time()
+print(df.head(1000))
+end = time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+[1000 rows x 23 columns]
+====== 0.04585  ms======
+```
+
+#### 2) Print count values for field_of_study 
+```python
+#SQL
+start = time.time()
+cursor.execute("select  field_of_study,count(*) as 'Count' from career_data_new group by field_of_study order by count(*) desc;")
+res = cursor.fetchall()
+for value in res:
+    print(value)
+end = time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+====== 0.10466  ms======
+```
+
+```python
+#Pandas
+start = time.time()
+res  = df.Field_of_Study.value_counts()
+print(res)
+end = time.time()
+print("======",round((end-start),5)," ms======")
+```
+### Output:
+```
+====== 0.03302  ms======
+```
