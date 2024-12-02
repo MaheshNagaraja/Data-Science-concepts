@@ -295,3 +295,16 @@ print("======",round((end-start),5)," ms======")
 1    Male       Medicine  Software Developer               46
 ====== 0.02325  ms======
 ```
+
+## What I have noticed?
+Both Pandas and SQL are powerful tools for data manipulation and analysis, but they are suited for different use cases and workflows.
+
+* __Pandas__ is ideal for small to medium-sized datasets that can fit into memory and require complex data manipulation within a Python environment.
+* __SQL__ is better for large-scale datasets that need to be stored in relational databases, where data querying and management efficiency are key.
+
+#### When to use?
+* Use Pandas if you're working within a Python environment, need to perform detailed transformations or analysis, and your data can be handled in memory.
+* Use SQL when working with large, persistent datasets stored in databases, and you need to efficiently perform queries, joins, and aggregations.
+
+#### Hybrid Approach:
+In many real-world scenarios, a hybrid approach is often the best solution. For example, you might use SQL to extract large datasets from a relational database and then load them into Pandas for further manipulation and analysis. This combines the best of both worlds—SQL for data retrieval and Pandas for complex data processing.
