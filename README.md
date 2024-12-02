@@ -34,6 +34,8 @@ MySQL Workbench, Python, Jypter Notebook, Pandas, sqlite3 and mysql.connector
 ### Steps to upload CSV into Mysql
 Note: After downloading  [Filed of Study vs Occupation](https://www.kaggle.com/datasets/jahnavipaliwal/field-of-study-vs-occupation) dataset edit file columns with '_'(Field of Study ==> Field_of_Study), once all column names are edited then it's ready to upload into MySQL workbench. Refer [Import CSV file into MySQL](https://www.databasestar.com/mysql-workbench-import-csv/).
 
+[Google colab link](https://colab.research.google.com/drive/1F68tc144MLI8-gu3ZlkXW970-QQbNKgw?usp=sharing)
+
 ### Steps to connect Mysql server in pandas and create DataFrame  
 
 ```python
