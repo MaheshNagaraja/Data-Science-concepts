@@ -77,3 +77,4 @@ df
 ```
 ### Time execution analysis - Pandas vs SQL
 
+
