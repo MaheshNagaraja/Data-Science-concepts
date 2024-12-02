@@ -1,4 +1,4 @@
-## Pandas vs SQL
+# Pandas vs SQL
 
 Pandas and SQL are distinctly used across industries. Both have their own strengths and purposes.
 
@@ -28,3 +28,8 @@ SQL is typically used in DBMS or command-line interfaces, GUI's or python librar
 
 Here is a small case study of time execution of pandas and SQL. I have used kaggle data set - [Filed of Study vs Occupation](https://www.kaggle.com/datasets/jahnavipaliwal/field-of-study-vs-occupation) for analysis.
 
+### Prerequisites
+### Steps to upload CSV into Mysql
+### Steps to connect Mysql server in pandas and create DataFrame
+### Time execution comparison - Pandas vs SQL
+### Conclusion
