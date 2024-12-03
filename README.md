@@ -5,6 +5,8 @@ Pandas and SQL are distinctly used across industries. Both have their own streng
 __SQL__ - Querying and Managing relational database.  
 __Pandas__ - Data manupilation and analysis in python.
 
+[My imp](https://github.com/MaheshNagaraja/Data-Science-concepts/blob/Pandas-vs-SQL/pandas-vs-sql.png)
+
 Here are key points of both SQL and Pandas:  
 
 __1)__ __Data storage__ :  
